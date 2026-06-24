@@ -358,9 +358,20 @@ All plain Node CommonJS, no deps.
   `.github/copilot-instructions.md` [all trim], `.kiro/steering/ponytail.md`
   [strip frontmatter]) asserts the normalized text equals the canonical body;
   `console.error` + non-zero exit on drift. Also asserts a few load-bearing
-  sentences survive verbatim in both `skills/ponytail/SKILL.md` and `AGENTS.md`
-  (SKILL.md is longer, so it's a canary, not full equality). Normalize line
-  endings (`\r\n`→`\n`) and trim before comparing.
+  **canary** sentences survive verbatim in both `skills/ponytail/SKILL.md` and
+  `AGENTS.md` (SKILL.md is longer, so it's a canary, not full equality).
+  Normalize line endings (`\r\n`→`\n`) and trim before comparing.
+
+  > ⚠️ **Pick canaries that are contiguous on a single line in BOTH files.**
+  > `skills/ponytail/SKILL.md` is hard-wrapped at ~76 cols, so phrases like
+  > "The best code is the code never written." are split across two lines there
+  > (`The best\ncode is the code never written.`) while being one line in
+  > `AGENTS.md` — a naïve substring check fails. Use these three, which are
+  > verified contiguous in both: `You are a lazy senior developer`,
+  > `Bug fix = root cause, not symptom`, and
+  > `input validation at trust boundaries`. (Match the substring after
+  > collapsing each file's internal newlines to spaces if you want to be
+  > wrap-proof.)
 
 - **`check-versions.js`** (CI gate): asserts the `version`/string `4.8.3`
   matches across `package.json`, `.claude-plugin/plugin.json`,

@@ -9,6 +9,12 @@ Architecture: `ponytail-config.js` (pure resolver) ← `ponytail-runtime.js`
 the three event hooks (`activate`, `mode-tracker`, `subagent`). OpenCode's
 `.mjs` and pi's `index.js` (file 3) `require()` config + instructions too.
 
+> ⚠️ **Note on the BOM strip:** the BOM-stripping regexes below are written as the
+> 6-character escape `/^\uFEFF/`. Emit those six literal characters
+> (backslash-u-F-E-F-F) — do **not** let a paste collapse them into an actual
+> invisible BOM character inside the regex. Both behave the same at runtime, but
+> only the escape form is byte-identical to the source.
+
 ---
 
 ## 1. `hooks/ponytail-config.js` — shared resolver
