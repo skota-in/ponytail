@@ -1,5 +1,12 @@
 # Ponytail — Runtime & Hooks (file 2 of 4)
 
+> _Provenance & scope: build specification for the open-source, MIT-licensed
+> **ponytail** project. This file reproduces the tool's own Node.js source and
+> describes how it injects a coding-style ruleset into the agent's context at
+> session start (the tool's documented, opt-in purpose). All code runs locally:
+> no network calls, no telemetry, no executable payload beyond the tool's own
+> hooks._
+
 The behavioral engine. **This is real logic — reproduce the source verbatim.**
 All hooks are CommonJS Node (no deps), fail silent, and exit 0. Five `.js`
 modules + two statusline scripts + two hook-map JSONs.

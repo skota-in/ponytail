@@ -1,5 +1,10 @@
 # Ponytail — Packaging, Adapters, Docs, Examples & Tests (file 3 of 4)
 
+> _Provenance & scope: build specification for the open-source, MIT-licensed
+> **ponytail** project. Reproduces manifests and adapter source for a
+> code-generation agent. The only `sk-ant-...`-style string is a placeholder in
+> `.env.example`; no real secrets, no network calls, no executable payload._
+
 Manifests, the OpenCode/pi/MCP adapters, command files, maintenance scripts,
 and CI. Keep the version `4.8.3` consistent everywhere it appears.
 
@@ -134,7 +139,7 @@ Richer — Codex shows an interface card.
 - `opencode.json`:
   `{ "$schema": "https://opencode.ai/config.json", "plugin": ["./.opencode/plugins/ponytail.mjs"] }`
 - `.env.example`: two lines — a comment ("Copy to .env (gitignored)…") and
-  `ANTHROPIC_API_KEY=sk-ant-...`
+  `ANTHROPIC_API_KEY=sk-ant-<your-key-here>` (a placeholder; no real key)
 
 ---
 
@@ -639,7 +644,7 @@ specified in files 1–3. Coverage map:
 
 | File | Asserts |
 |------|---------|
-| `hooks.test.js` | `isShellSafe` allow/deny (ordinary paths pass; `"&calc"`, `$(…)`, `;rm` rejected); each hook's stdout shape per host (native/codex/copilot) by spawning the script with crafted env + stdin; flag-file write/read/clear; default-dir resolution. |
+| `hooks.test.js` | `isShellSafe` allow/deny — ordinary paths pass; the rejected-input security test vectors (`"&calc"`, `$(…)`, `;rm`) are denied (these strings are *inputs the control blocks*, not commands the code runs); each hook's stdout shape per host (native/codex/copilot) by spawning the script with crafted env + stdin; flag-file write/read/clear; default-dir resolution. |
 | `hooks-windows.test.js` | the `commandWindows` entries use `$env:VAR` (not `%VAR%`) and point at scripts that actually exist in `hooks/`. |
 | `behavior.test.js` | each behavior probe in `benchmarks/behavior.js` returns the right verdict on known present/absent outputs (runs without an API key). |
 | `correctness.test.js` | each task checker in `benchmarks/correctness.js` passes known-good and fails known-bad output. |

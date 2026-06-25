@@ -1,5 +1,11 @@
 # Ponytail — Build Blueprint (file 0 of 4)
 
+> _Provenance & scope: this is a build specification for the open-source,
+> MIT-licensed **ponytail** project (https://github.com/DietrichGebert/ponytail).
+> It instructs a code-generation agent and describes the tool's
+> context-injection mechanism in plain terms. It contains no secrets, no network
+> calls, and no executable payload._
+
 > **You are an AI coding agent (Codex / Copilot / Claude). Your job: regenerate
 > the entire `ponytail` repository from these four markdown files.** Read all
 > four first, then build in the order given here. Everything you need is in
@@ -156,7 +162,7 @@ from the specs.
 ├── package.json                    ★ # npm manifest, version 4.8.3 — file 3
 ├── opencode.json                     # { plugin: ["./.opencode/plugins/ponytail.mjs"] }
 ├── gemini-extension.json             # { name, version 4.8.3, contextFileName: "AGENTS.md" }
-├── .env.example                      # ANTHROPIC_API_KEY=sk-ant-...
+├── .env.example                      # ANTHROPIC_API_KEY=sk-ant-<your-key-here>
 ├── .gitignore                        # node_modules, .env, benchmark output, etc.
 │
 ├── skills/                         ★ # SIX canonical SKILL.md files — file 1

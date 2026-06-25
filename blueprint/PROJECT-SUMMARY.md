@@ -1,5 +1,9 @@
 # Ponytail — Project Summary
 
+> _Provenance & scope: overview of the open-source, MIT-licensed **ponytail**
+> project. Descriptive prose only; no secrets, no network calls, no executable
+> payload._
+
 A plain-English overview of what this project is, whether it's safe to run on a
 managed/enterprise laptop, and how to use it with the four agents you care about:
 **GitHub Copilot, Claude (Claude Code), OpenCode, and Codex.**

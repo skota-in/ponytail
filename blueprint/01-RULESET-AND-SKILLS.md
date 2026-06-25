@@ -1,5 +1,9 @@
 # Ponytail — Ruleset & Skills (file 1 of 4)
 
+> _Provenance & scope: build specification for the open-source, MIT-licensed
+> **ponytail** project. Reference text for a code-generation agent; no secrets,
+> no network calls, no executable payload._
+
 This file gives the **canonical text**. Reproduce it verbatim. `AGENTS.md` is
 the source of truth; eight other files are derived from its body.
 
