@@ -29,6 +29,22 @@ line) before writing new code, keep it readable, confirm versioned APIs against 
 never cut validation, security, or accessibility — plus `lean` / `fresh-docs` / `review` skills and
 optional Claude hooks (auto-format on edit, verify gate on stop).
 
+## Optimize an existing setup (audit → measure → trim)
+
+If you already run skills/MCP/hooks across Claude, Codex, OpenCode, and Copilot, these prompts cut
+the token bill. Paste each into Claude Code; all are **read-only and redact secrets** (photo-safe).
+
+| File | What it does |
+|------|--------------|
+| `prompt.md` | Inventories every MCP server, skill, agent, hook, and instruction file across all four tools. |
+| `analysis.md` | The findings + a ranked trim plan (always-on vs on-demand tokens, dedupe, safety flags). Read this. |
+| `prompt-measure.md` | Measures the always-on cost that the inventory couldn't — tools-per-MCP-server. Run after `prompt.md`. |
+
+**Key idea:** the scary "100K+ tokens" is mostly skill *bodies*, which load **on demand** — you only
+pay for them when a task uses them. The bill you pay *every prompt* is instruction files + **MCP tool
+schemas** + skill descriptions. Shrink those; keep the heavy bodies for when you need them. Full
+reasoning and the step-by-step plan are in `analysis.md`.
+
 ## Compliance
 
 Pure text, Node/sh only — no Python, no network calls, no telemetry, no new dependencies. The only
