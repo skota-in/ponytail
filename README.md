@@ -39,7 +39,8 @@ the token bill. Paste each into Claude Code; all are **read-only and redact secr
 | `prompt.md` | Inventories every MCP server, skill, agent, hook, and instruction file across all four tools. |
 | `analysis.md` | The findings + a ranked trim plan (always-on vs on-demand tokens, dedupe, safety flags). Read this. |
 | `prompt-measure.md` | Measures the always-on cost that the inventory couldn't — tools-per-MCP-server. Run after `prompt.md`. |
-| `prompt-apply.md` | Applies the trim safely (backs up first, confirms each change, won't touch auth). Run after you've read `analysis.md`. |
+| `prompt-apply.md` | Surgical trim — fixes just the GitLab MCP (the ~55% item) and dead config. Use if you want to keep your setup and cut the biggest cost. |
+| `prompt-reset.md` | **Clean slate** — backs up everything, then strips all discretionary MCPs/skills/agents/hooks to a lean baseline, keeping auth + providers. Add things back on demand from the backup. |
 
 **Measured result:** the scary "110K tokens" was ~85% on-demand (skill bodies you only pay for when
 used). Of the ~15–16K that hits *every* prompt, **one item — the GitLab MCP's 102 tool schemas in
