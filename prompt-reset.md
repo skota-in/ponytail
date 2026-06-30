@@ -7,26 +7,24 @@ remove the discretionary stuff — but keep what gives me model access.
 
 ## Golden rules
 
-1. **Back up first (step 0). The backup IS my "add it back later" library.** I can't re-download
-   these, so nothing gets deleted until it's in the backup bundle.
+1. **No full backup needed — I restore things by re-running their install command.** So instead of
+   a backup bundle, just keep a one-line **removal manifest** (step 0) of what you took out and
+   where it came from, so I know what to re-run later.
 2. **NEVER remove auth or model access.** Keep: `@statefarm/opencode-ghcp-auth`, the `ghcp` /
    `amazon-bedrock` / `litellm` provider config, Codex's sandbox + trusted-paths, and each tool's
    model-catalog/login. If you're unsure whether something is auth, **keep it and ask.**
-2. **Confirm before deleting.** Show me the full keep-list vs remove-list and wait for my "yes".
-3. **Never inline or print secrets.**
+3. **Confirm before deleting.** Show me the full keep-list vs remove-list and wait for my "yes".
+4. **Never inline or print secrets.**
 
-## Step 0 — Back up to a restorable bundle (do first)
+## Step 0 — Removal manifest (lightweight, no backup bundle)
 
-Pack the **current** config of all four tools into one self-extracting markdown file
-`~/agent-config-backup.md`:
-- Include: `~/.claude/` (settings.json, CLAUDE.md, skills/, agents/, the worktree hooks),
-  `~/.codex/` (config.toml, AGENTS.md, skills/), `~/.config/opencode/` (opencode.json, AGENTS.md),
-  `~/.copilot/` (instructions, mcp config, skills/, agents/).
-- One clearly-labeled `==== BEGIN FILE: <path> ==== … ==== END FILE ====` block per item, so I can
-  restore any single skill/MCP/agent later by copying just its block back.
-- **Keep values verbatim** (this is a restore file, not a photo) — but this file then contains real
-  config: mark it `LOCAL ONLY — DO NOT SHARE / COMMIT / PHOTOGRAPH`, and don't print its contents.
-- Confirm the file exists, report its size and how many blocks it holds. THEN continue.
+As you remove things, record a simple list at `~/agent-removed.md` — one line per removed item:
+**name · type (MCP/skill/agent/hook) · which tool · source (npm package / marketplace id / repo /
+local file)**. That's my re-add cheat-sheet.
+
+⚠️ One check before deleting: if any item is a **hand-authored local file** (not installable from a
+marketplace/package/repo), a reinstall command won't bring it back — flag those and ask me before
+removing, in case I want to copy them somewhere first.
 
 ## Step 1 — Show the plan, get my OK
 
@@ -60,11 +58,12 @@ validation/security/accessibility). Keep one canonical `~/AGENTS.md`; point `CLA
    model. If any tool fails to auth, STOP and tell me what changed (we restore from the backup).
 2. Print a before/after table: always-on tokens per prompt, per tool, before vs after, and total
    saved. (Baseline before ≈ 15–16.5K across all four; the GitLab MCP alone was ~9K.)
-3. List exactly what was removed, where its backup block is, and the one-line way to restore it.
+3. Confirm `~/agent-removed.md` lists every removed item with its source, and call out any
+   hand-authored local files you preserved.
 
 ## How I add things back later
 
-When I actually need something, restore its block from `~/agent-config-backup.md` into the right
-tool — nothing is lost, it's just not loaded until it earns its place.
+When I actually need something, I re-run its install command (from `~/agent-removed.md`) — or for a
+local-file item, copy it back. Nothing is loaded until it earns its place.
 
 Do nothing outside these steps, and nothing at all without my go-ahead at step 1.
