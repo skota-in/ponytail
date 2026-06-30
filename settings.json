@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Lean doctrine active: leverage built-ins over hand-rolled code, confirm versioned APIs against current docs, keep terseness readable, delete what you replace.\"}}'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'f=\"$CLAUDE_FILE_PATH\"; [ -n \"$f\" ] || exit 0; if command -v biome >/dev/null 2>&1; then biome format --write \"$f\" >/dev/null 2>&1; elif command -v npx >/dev/null 2>&1; then npx --no-install prettier --write \"$f\" >/dev/null 2>&1; fi; true'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'IN=$(cat); [ \"$(printf \"%s\" \"$IN\" | (command -v jq >/dev/null 2>&1 && jq -r .stop_hook_active || echo false))\" = true ] && exit 0; cd \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || exit 0; [ -f package.json ] || exit 0; grep -q \"\\\"verify\\\"\" package.json || exit 0; npm run -s verify >/tmp/verify.log 2>&1 && exit 0; echo \"verify failed; fix before finishing:\" >&2; tail -20 /tmp/verify.log >&2; exit 2'",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}
