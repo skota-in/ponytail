@@ -1,68 +1,65 @@
-# Story Orchestrator — multi-model delivery pipeline
+# Story Orchestrator — Self-Extracting Bundle (the "zip")
+<!-- AGENT UNPACK PROTOCOL -->
+SCOPE: project
 
-A self-contained setup guide for a three-stage, cost-tiered Claude Code subagent
-pipeline that takes a story/requirement from **spec → implementation → release**.
-Everything you need is in this one file. Copy each block into the path shown in
-its heading and you have the whole pipeline.
+You are an AI coding agent (Claude Code or Codex). This is a **zip carried as text**: a three-stage,
+cost-tiered subagent pipeline that takes a story/requirement from **spec → implementation → release**.
+Unzip it by recreating every file below, verbatim, into the project, then use it via `/story`. Write
+files only.
 
----
+## What you get
 
-## What this is
+A `/story` orchestrator command plus three named subagents, each pinned a tier cheaper than the last:
 
-A `/story` slash command (the orchestrator) plus three named subagents, each
-pinned to a cheaper model tier than the last:
+| Stage | File | Model | Job |
+|-------|------|-------|-----|
+| Orchestrator | `.claude/commands/story.md` | opus | Triage complexity, dispatch the agents by name in strict order |
+| 1. Spec | `.claude/agents/spec-analyst.md` | opus | Story → tight spec, no code, asks nothing back |
+| 2. Build | `.claude/agents/implementer.md` | sonnet | Implement to spec, run build/tests, no git |
+| 3. Ship | `.claude/agents/releaser.md` | haiku | Conventional-commit, push, open merge request, no edits |
 
-| Stage | File | Model | Tools | Job |
-|-------|------|-------|-------|-----|
-| Orchestrator | `.claude/commands/story.md` | opus | — | Triage complexity, dispatch the agents by name in strict order |
-| 1. Spec | `.claude/agents/spec-analyst.md` | opus | Read, Grep, Glob, WebSearch | Story → tight spec, no code, asks nothing back |
-| 2. Build | `.claude/agents/implementer.md` | sonnet | Read, Write, Edit, Bash, Glob, Grep | Implement to spec, run build/tests, no git |
-| 3. Ship | `.claude/agents/releaser.md` | haiku | Bash, Read | Conventional-commit, push, open merge request, no edits |
+**Two design ideas:** (1) Subagent models only route DOWN in cost from the main session, so **run your
+main session on Opus** — the expensive model sits on top and decides what work is worth the cheaper
+models' time. (2) The orchestrator triages first and **skips stages for small work**, so a typo fix
+never pays for an Opus spec stage.
 
-### Two design ideas worth knowing
+## Unzip protocol
 
-1. **Cost flows down.** Subagent models can only route DOWN in cost tier from
-   the main session, so **run your main session on Opus.** The expensive model
-   sits at the top and decides what work is worth the cheaper models' time.
-2. **The machinery is matched to the task.** The orchestrator triages first and
-   skips stages for small work — a typo fix never pays for an Opus spec stage.
+1. SCOPE is `project` → base path is the current repo root (`.`).
+2. For each block delimited EXACTLY by:
+       ==== BEGIN FILE: <relative/path> ====
+       ...content (may contain ``` fences — fine)...
+       ==== END FILE ====
+   write base/<relative/path> byte-for-byte; create dirs as needed; do NOT reflow or "fix" content.
+   A real delimiter has NO leading whitespace and a real relative path; marker-like lines inside content
+   pass through unchanged. Reject any path with `..` or an absolute path; touch no other files.
+3. After writing, print the tree and a one-line confirmation, then tell the human: set the main session
+   to Opus (`/model opus`) and run `/story <your requirement>`.
 
----
+## Run it
 
-## Setup (do this on your office laptop)
-
-1. Unzip into the root of the repo you want to use it in (or `~/.claude` to make
-   it global across all projects).
-2. You should end up with:
-   ```
-   .claude/
-     commands/story.md
-     agents/spec-analyst.md
-     agents/implementer.md
-     agents/releaser.md
-   ```
-3. Start Claude Code with the main session on **Opus** (e.g. `/model opus`).
-4. Run it:
-   ```
-   /story <your requirement>
-   ```
-
-### Examples
 ```
 /story Add a --dry-run flag to prompt-apply that prints the diff without writing files
 /story Fix the typo "minfied" -> "minified" in README.md
-/story Add retry-with-backoff to the network client and cover it with a unit test
 ```
 
-> Note: the releaser opens the merge request with `gh pr create`. Install and
-> auth the GitHub CLI (`gh auth login`) for that step to work; without it the
-> releaser falls back to printing the compare URL.
+> The releaser opens the merge request with `gh pr create`; install + auth the GitHub CLI for that
+> step, else it falls back to printing the compare URL.
 
----
+## Compliance note
 
-## File 1 — `.claude/commands/story.md`
+Pure text — no Python, no network calls, no telemetry, no new dependencies. The agents only run the
+git/build/test commands your project already has.
 
-```markdown
+Human: paste this whole file into Claude Code and say **"unzip this bundle into the project"**.
+
+## Manifest (4 files)
+- [ ] .claude/commands/story.md
+- [ ] .claude/agents/spec-analyst.md
+- [ ] .claude/agents/implementer.md
+- [ ] .claude/agents/releaser.md
+
+==== BEGIN FILE: .claude/commands/story.md ====
 ---
 description: >-
   Drive a story/requirement spec → implementation → release through three named,
@@ -164,13 +161,9 @@ End with a compact summary:
 - **Release**: commit message, branch, and PR/MR URL.
 - **Cost note**: which stages ran on which model tier, so I can see where the
   spend went.
-```
+==== END FILE ====
 
----
-
-## File 2 — `.claude/agents/spec-analyst.md`
-
-```markdown
+==== BEGIN FILE: .claude/agents/spec-analyst.md ====
 ---
 name: spec-analyst
 description: >-
@@ -241,13 +234,9 @@ Every decision you made to resolve an ambiguity.
 
 Keep it terse and skimmable. The next stage is a smaller, cheaper model — your
 precision is what lets it succeed without re-thinking the design.
-```
+==== END FILE ====
 
----
-
-## File 3 — `.claude/agents/implementer.md`
-
-```markdown
+==== BEGIN FILE: .claude/agents/implementer.md ====
 ---
 name: implementer
 description: >-
@@ -306,13 +295,9 @@ yourself.
 If you are `blocked` or `failed`, be explicit about what the next actor (the
 orchestrator or a human) must decide. The pipeline stops on anything that isn't
 `success`.
-```
+==== END FILE ====
 
----
-
-## File 4 — `.claude/agents/releaser.md`
-
-```markdown
+==== BEGIN FILE: .claude/agents/releaser.md ====
 ---
 name: releaser
 description: >-
@@ -342,11 +327,11 @@ is already written and verified. You package it and ship it.
    a default branch.
 3. `git add -A`.
 4. Commit with a **Conventional Commits** message:
-   \```
-   <type>(<scope>): <imperative summary>
 
-   <body: what & why, derived from the spec>
-   \```
+       <type>(<scope>): <imperative summary>
+
+       <body: what & why, derived from the spec>
+
    `type` ∈ feat | fix | refactor | docs | chore | test | perf | build | ci.
    Keep the summary ≤ 72 chars. Use the change type the implementer reported.
 5. Push: `git push -u origin <current-branch>`. On a network error only, retry
@@ -372,16 +357,4 @@ The PR/MR URL, or the compare URL if `gh` was unavailable.
 
 Keep it factual and short. Report exactly what happened — if a step failed, say
 which and paste the error.
-```
-
----
-
-## Reconstructing the files from this doc
-
-Each fenced block above maps 1:1 to a file. Create the four paths and paste the
-contents between the ` ```markdown ` fences (drop the outer fence itself). The
-one place to watch: in `releaser.md`, the inner commit-message fence is escaped
-as `\``` in this doc — replace each `\``` with a plain triple-backtick when you
-paste, or just use the copies committed alongside this file on the
-`minified4` branch.
-```
+==== END FILE ====
