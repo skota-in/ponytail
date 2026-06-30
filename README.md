@@ -39,11 +39,13 @@ the token bill. Paste each into Claude Code; all are **read-only and redact secr
 | `prompt.md` | Inventories every MCP server, skill, agent, hook, and instruction file across all four tools. |
 | `analysis.md` | The findings + a ranked trim plan (always-on vs on-demand tokens, dedupe, safety flags). Read this. |
 | `prompt-measure.md` | Measures the always-on cost that the inventory couldn't — tools-per-MCP-server. Run after `prompt.md`. |
+| `prompt-apply.md` | Applies the trim safely (backs up first, confirms each change, won't touch auth). Run after you've read `analysis.md`. |
 
-**Key idea:** the scary "100K+ tokens" is mostly skill *bodies*, which load **on demand** — you only
-pay for them when a task uses them. The bill you pay *every prompt* is instruction files + **MCP tool
-schemas** + skill descriptions. Shrink those; keep the heavy bodies for when you need them. Full
-reasoning and the step-by-step plan are in `analysis.md`.
+**Measured result:** the scary "110K tokens" was ~85% on-demand (skill bodies you only pay for when
+used). Of the ~15–16K that hits *every* prompt, **one item — the GitLab MCP's 102 tool schemas in
+OpenCode — is ~9,000 tokens (~55%).** Filtering that one server's toolset saves ~6,000/prompt and
+makes the model's tool use sharper. Everything else is small. Full numbers + the fix are in
+`analysis.md`; apply them with `prompt-apply.md`.
 
 ## Compliance
 
