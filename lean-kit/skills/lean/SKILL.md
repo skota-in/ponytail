@@ -7,7 +7,15 @@ argument-hint: "[lite|full|ultra]"
 # Lean code discipline
 
 Goal: maximum capability, minimum code, zero reinvention — while staying readable and correct.
-The companion enforcement of the doctrine in `AGENTS.md`.
+The companion enforcement of the doctrine in `AGENTS.md`. **Lazy about code, never about ideas.**
+
+## Think wide, then build narrow
+
+Minimalism is the output, not the thinking. Before the ladder, for anything non-trivial:
+hold 2–3 approaches, name each trade-off in a line, and **challenge the framing** (a different,
+smaller, or no problem may be the real answer) — then collapse to the leanest version of the best
+one. State that approach in two lines before editing; confirm big/irreversible changes. Pull only
+the context and tools the task needs — don't front-load.
 
 ## First, understand — then climb the ladder
 
