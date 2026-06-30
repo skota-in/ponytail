@@ -81,6 +81,37 @@ Reach for the platform, the framework, and the standard library *before* writing
 hand. Prefer the boring, obvious, composable solution over the clever one — then make it dense
 once it's correct.
 
+**Lazy about code, never about ideas.** Explore the problem widely, then ship the smallest thing
+that nails it. Minimalism is the *output*, not the thinking.
+
+## Think wide, then build narrow
+
+The minimal solution comes *after* expansive thinking, not instead of it. The best, most original
+answers live in the approach you didn't reach for first.
+
+- **Understand deeply.** Read the task and the code it touches; trace the real flow end to end.
+  Most bad solutions are misunderstandings, not bad code.
+- **Explore before committing.** For anything non-trivial, hold 2–3 approaches, name the trade-off
+  of each in a line, and pick the best — don't ship your first idea reflexively.
+- **Challenge the framing.** The best solution is sometimes a different problem, a smaller problem,
+  or no problem (YAGNI). Question the requirement before satisfying it: "do you need X, or does Y
+  get you there?"
+- **Then collapse** to the leanest version of the best approach — that's what the ladder below does.
+
+## Plan before you spend
+
+For non-trivial or risky work, restate the task and your approach in two lines before you edit —
+and confirm before a large, ambiguous, or hard-to-undo change. A 50-token plan that catches a
+misunderstanding beats 5,000 tokens spent down the wrong path. Don't ask permission for the
+obvious; do surface the plan when the change is big or irreversible.
+
+## Load on demand
+
+Pull only the context, files, tools, and docs the task actually needs — never everything "just in
+case." A tight working set is faster, cheaper, and *sharper*: a model chooses better among ten
+relevant tools than a hundred. Reach for a skill, an MCP tool, or a file when the task calls for
+it; don't front-load. Keep the always-on surface tiny; let depth load when earned.
+
 ## The ladder — climb it before you write
 
 Understand the problem first: read the task and the code it touches, trace the real flow end to
@@ -261,7 +292,15 @@ argument-hint: "[lite|full|ultra]"
 # Lean code discipline
 
 Goal: maximum capability, minimum code, zero reinvention — while staying readable and correct.
-The companion enforcement of the doctrine in `AGENTS.md`.
+The companion enforcement of the doctrine in `AGENTS.md`. **Lazy about code, never about ideas.**
+
+## Think wide, then build narrow
+
+Minimalism is the output, not the thinking. Before the ladder, for anything non-trivial:
+hold 2–3 approaches, name each trade-off in a line, and **challenge the framing** (a different,
+smaller, or no problem may be the real answer) — then collapse to the leanest version of the best
+one. State that approach in two lines before editing; confirm big/irreversible changes. Pull only
+the context and tools the task needs — don't front-load.
 
 ## First, understand — then climb the ladder
 
@@ -427,6 +466,37 @@ Reach for the platform, the framework, and the standard library *before* writing
 hand. Prefer the boring, obvious, composable solution over the clever one — then make it dense
 once it's correct.
 
+**Lazy about code, never about ideas.** Explore the problem widely, then ship the smallest thing
+that nails it. Minimalism is the *output*, not the thinking.
+
+## Think wide, then build narrow
+
+The minimal solution comes *after* expansive thinking, not instead of it. The best, most original
+answers live in the approach you didn't reach for first.
+
+- **Understand deeply.** Read the task and the code it touches; trace the real flow end to end.
+  Most bad solutions are misunderstandings, not bad code.
+- **Explore before committing.** For anything non-trivial, hold 2–3 approaches, name the trade-off
+  of each in a line, and pick the best — don't ship your first idea reflexively.
+- **Challenge the framing.** The best solution is sometimes a different problem, a smaller problem,
+  or no problem (YAGNI). Question the requirement before satisfying it: "do you need X, or does Y
+  get you there?"
+- **Then collapse** to the leanest version of the best approach — that's what the ladder below does.
+
+## Plan before you spend
+
+For non-trivial or risky work, restate the task and your approach in two lines before you edit —
+and confirm before a large, ambiguous, or hard-to-undo change. A 50-token plan that catches a
+misunderstanding beats 5,000 tokens spent down the wrong path. Don't ask permission for the
+obvious; do surface the plan when the change is big or irreversible.
+
+## Load on demand
+
+Pull only the context, files, tools, and docs the task actually needs — never everything "just in
+case." A tight working set is faster, cheaper, and *sharper*: a model chooses better among ten
+relevant tools than a hundred. Reach for a skill, an MCP tool, or a file when the task calls for
+it; don't front-load. Keep the always-on surface tiny; let depth load when earned.
+
 ## The ladder — climb it before you write
 
 Understand the problem first: read the task and the code it touches, trace the real flow end to
@@ -556,7 +626,15 @@ argument-hint: "[lite|full|ultra]"
 # Lean code discipline
 
 Goal: maximum capability, minimum code, zero reinvention — while staying readable and correct.
-The companion enforcement of the doctrine in `AGENTS.md`.
+The companion enforcement of the doctrine in `AGENTS.md`. **Lazy about code, never about ideas.**
+
+## Think wide, then build narrow
+
+Minimalism is the output, not the thinking. Before the ladder, for anything non-trivial:
+hold 2–3 approaches, name each trade-off in a line, and **challenge the framing** (a different,
+smaller, or no problem may be the real answer) — then collapse to the leanest version of the best
+one. State that approach in two lines before editing; confirm big/irreversible changes. Pull only
+the context and tools the task needs — don't front-load.
 
 ## First, understand — then climb the ladder
 
@@ -745,6 +823,37 @@ The best code is the code you never had to write.
 Reach for the platform, the framework, and the standard library *before* writing anything by
 hand. Prefer the boring, obvious, composable solution over the clever one — then make it dense
 once it's correct.
+
+**Lazy about code, never about ideas.** Explore the problem widely, then ship the smallest thing
+that nails it. Minimalism is the *output*, not the thinking.
+
+## Think wide, then build narrow
+
+The minimal solution comes *after* expansive thinking, not instead of it. The best, most original
+answers live in the approach you didn't reach for first.
+
+- **Understand deeply.** Read the task and the code it touches; trace the real flow end to end.
+  Most bad solutions are misunderstandings, not bad code.
+- **Explore before committing.** For anything non-trivial, hold 2–3 approaches, name the trade-off
+  of each in a line, and pick the best — don't ship your first idea reflexively.
+- **Challenge the framing.** The best solution is sometimes a different problem, a smaller problem,
+  or no problem (YAGNI). Question the requirement before satisfying it: "do you need X, or does Y
+  get you there?"
+- **Then collapse** to the leanest version of the best approach — that's what the ladder below does.
+
+## Plan before you spend
+
+For non-trivial or risky work, restate the task and your approach in two lines before you edit —
+and confirm before a large, ambiguous, or hard-to-undo change. A 50-token plan that catches a
+misunderstanding beats 5,000 tokens spent down the wrong path. Don't ask permission for the
+obvious; do surface the plan when the change is big or irreversible.
+
+## Load on demand
+
+Pull only the context, files, tools, and docs the task actually needs — never everything "just in
+case." A tight working set is faster, cheaper, and *sharper*: a model chooses better among ten
+relevant tools than a hundred. Reach for a skill, an MCP tool, or a file when the task calls for
+it; don't front-load. Keep the always-on surface tiny; let depth load when earned.
 
 ## The ladder — climb it before you write
 
